@@ -589,6 +589,22 @@ the layout to the selected layout-name."
   (interactive "sEnter your nickname: ")
   (riece-send-string (format "NICK %s\r\n" nickname)))
 
+(defun riece-command-dialogue-scroll-down ()
+  "Scroll down dialogue buffer."
+  (interactive)
+  (if (pos-visible-in-window-p (point-min))
+      (message "Beginning of buffer")
+    (scroll-down)))
+
+(defun riece-command-dialogue-scroll-up ()
+  "Scroll up dialogue buffer."
+  (interactive)
+  (if (pos-visible-in-window-p (point-max))
+      (progn
+	(goto-char (point-max))
+	(recenter 1))
+    (scroll-up)))
+
 (defun riece-command-scroll-down (lines)
   "Scroll LINES down dialogue buffer from command buffer."
   (interactive "P")

@@ -156,6 +156,10 @@ Local to the channel buffers.")
   "Last value of point in window which displayed the channel buffer.
 Local to the channel buffers.")
 
+(defvar riece-channel-buffer-window-start nil
+  "Last value of start in window which displayed the channel buffer.
+Local to the channel buffers.")
+
 ;;; Modeline indicators:
 (defvar riece-mode-line-buffer-identification nil)
 (put 'riece-mode-line-buffer-identification 'risky-local-variable t)

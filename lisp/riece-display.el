@@ -441,7 +441,8 @@ Local to the buffer in `riece-buffer-list'.")
     (if (and riece-channel-buffer
 	     (setq window (get-buffer-window riece-channel-buffer)))
 	(with-current-buffer riece-channel-buffer
-	  (setq riece-channel-buffer-window-point (window-point window))))
+	  (setq riece-channel-buffer-window-point (window-point window))
+	  (setq riece-channel-buffer-window-start (window-start window))))
     (setq riece-current-channel identity
 	  riece-channel-buffer (riece-channel-buffer riece-current-channel))
     (run-hook-with-args 'riece-after-switch-to-channel-functions last)

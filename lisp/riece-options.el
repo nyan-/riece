@@ -322,6 +322,11 @@ specifying the coding systems for decoding and encoding respectively."
   :type 'boolean
   :group 'riece-looks)
 
+(defcustom riece-others-freeze nil
+  "Others buffer local freeze flag is on at starting."
+  :type 'boolean
+  :group 'riece-looks)
+
 (defcustom riece-default-channel-binding nil
   "The channel list to bind the channel number when joining."
   :type '(repeat (radio (string :tag "Bound Channel")

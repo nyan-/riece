@@ -141,17 +141,17 @@ If optional argument SAFE is nil, overwrite previous definitions."
 
 (when t
   (riece-define-keys riece-dialogue-mode-map
-    "\177" scroll-down
-    [delete] scroll-down
-    [backspace] scroll-down
-    [return] scroll-up
-    " " scroll-up
+    "\177" riece-command-dialogue-scroll-down
+    [delete] riece-command-dialogue-scroll-down
+    [backspace] riece-command-dialogue-scroll-down
+    [return] riece-command-dialogue-scroll-up
+    " " riece-command-dialogue-scroll-up
     [home] beginning-of-buffer
     "$" end-of-buffer
     [end] end-of-buffer
     "/" riece-command-raw
-    ">" end-of-buffer
-    "<" beginning-of-buffer
+    ">" riece-command-next-channel
+    "<" riece-command-previous-channel
     "^" riece-command-list-addons
     "\C-ta" riece-command-toggle-away
     "c" riece-command-select-command-buffer
@@ -440,7 +440,8 @@ Instead, these commands are available:
   "Major mode for displaying the IRC others message except current channel.
 All normal editing commands are turned off.
 Instead, these commands are available:
-\\{riece-others-mode-map}")
+\\{riece-others-mode-map}"
+  (setq riece-freeze riece-others-freeze))
 
 (define-derived-mode riece-channel-mode riece-dialogue-mode
   "Channel"
@@ -449,6 +450,7 @@ All normal editing commands are turned off.
 Instead, these commands are available:
 \\{riece-channel-mode-map}"
   (make-local-variable 'riece-channel-buffer-window-point)
+  (make-local-variable 'riece-channel-buffer-window-start)
   (make-local-variable 'riece-mode-line-buffer-identification)
   (setq riece-mode-line-buffer-identification
 	'("Riece: "

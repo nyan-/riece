@@ -95,8 +95,11 @@ happen unconditionally."
       (with-current-buffer riece-channel-buffer
 	(if (riece-frozen riece-channel-buffer)
 	    (if riece-channel-buffer-window-point
-		(set-window-point (get-buffer-window riece-channel-buffer)
-				  riece-channel-buffer-window-point))
+		(progn
+		  (set-window-point (get-buffer-window riece-channel-buffer)
+				    riece-channel-buffer-window-point)
+		  (set-window-start (get-buffer-window riece-channel-buffer)
+				    riece-channel-buffer-window-start)))
 	  (set-window-point (get-buffer-window riece-channel-buffer)
 			    (point-max)))))
   (if (get-buffer-window riece-others-buffer)
@@ -197,7 +200,7 @@ This function is used by \"default\" layout."
 			   riece-command-buffer)))
     (riece-set-window-points)
     (select-window (or (get-buffer-window buffer)
-		       (get-buffer-window riece-command-buffer)))))
+		       (get-buffer-window riece-channel-buffer)))))
 
 (defun riece-configure-windows-top (&rest plist)
   "Candidate of `riece-configure-windows-function'.
@@ -254,7 +257,7 @@ PLIST accept :command-height, :user-list-width, and :channel-list-width."
       (set-window-buffer (selected-window) riece-dialogue-buffer))
     (riece-set-window-points)
     (select-window (or (get-buffer-window buffer)
-		       (get-buffer-window riece-command-buffer)))))
+		       (get-buffer-window riece-channel-buffer)))))
 
 ;; +---+-------------------+---+
 ;; | c | channel           | u |
@@ -300,7 +303,7 @@ PLIST accept :command-height, :user-list-width, and :channel-list-width."
 
     (riece-set-window-points)
     (select-window (or (get-buffer-window buffer)
-                       (get-buffer-window riece-command-buffer)))))
+			(get-buffer-window riece-channel-buffer)))))
 
 (defun riece-configure-windows-one-window ()
   ;; Can't expand minibuffer to full frame.
